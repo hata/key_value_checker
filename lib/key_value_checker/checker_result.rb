@@ -5,7 +5,7 @@
       @result = result
     end
 
-    def print_result
+    def print_result(cmd_options)
           # Dump result
       print "---- RESULT ----\n"
       print "config: #{cmd_options[:config_file]}\n"

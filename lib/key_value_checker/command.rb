@@ -34,7 +34,7 @@ module KeyValueChecker
       params.load_file(cmd_options[:params_file])
 
       checker = KeyValueChecker::Checker.new
-      checker.validate(config, params).print_result
+      checker.validate(config, params).print_result(cmd_options)
     end
   end
 end
