@@ -2,6 +2,8 @@ require 'yaml'
 require 'key_value_checker/key_value_access'
 
 module KeyValueChecker
+  # Load config from a file and then return the value via
+  # to_map method.
   class CheckerConfig
     include KeyValueAccess
 

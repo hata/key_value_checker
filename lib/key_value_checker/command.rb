@@ -1,8 +1,8 @@
 require 'optparse'
 
 module KeyValueChecker
-  # Your code goes here...
-
+  # Command line tool helper.
+  # Command.run(ARGV)
   class Command
     def self.run(argv)
       new(argv).execute
@@ -13,12 +13,11 @@ module KeyValueChecker
     end
 
     def parse_argv
-      # Commands
       cmd_options = {}
 
       OptionParser.new do |opt|
-        opt.on('-c CONFIG_FILE') {|v| cmd_options[:config_file] = v}
-        opt.on('-q QUERY_PARAMS_FILE') {|v| cmd_options[:params_file] = v}
+        opt.on('-c CONFIG_FILE') { |v| cmd_options[:config_file] = v }
+        opt.on('-q QUERY_PARAMS_FILE') { |v| cmd_options[:params_file] = v }
         opt.parse!(@argv)
       end
 
@@ -34,7 +33,7 @@ module KeyValueChecker
       params.load_file(cmd_options[:params_file])
 
       checker = KeyValueChecker::Checker.new
-      checker.validate(config, params).print_result(cmd_options)
+      checker.validate(config, params, KeyValueChecker::CheckerResult.new).print_result(cmd_options)
     end
   end
 end

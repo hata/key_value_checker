@@ -1,30 +1,36 @@
- module KeyValueChecker
+module KeyValueChecker
+  # Dump checker result.
   class CheckerResult
-    def initialize(result)
-      super()
-      @result = result
+    def initialize
+      super
+      @result = []
+    end
+
+    def add(key_results)
+      @result.concat key_results
     end
 
     def print_result(cmd_options)
-          # Dump result
-      print "---- RESULT ----\n"
-      print "config: #{cmd_options[:config_file]}\n"
-      print "config: #{cmd_options[:params_file]}\n"
-      print "\n"
+      result_message = result_to_message_list.join("\n")
 
-      @result.each do |entry|
+      print "---- RESULT ----\n"
+      print "config_file: #{cmd_options[:config_file]}\n"
+      print "params_file: #{cmd_options[:params_file]}\n"
+      print "\n#{result_message}\n"
+    end
+
+    def result_to_message_list
+      @result.map do |entry|
         if !entry
-          print "ERROR: entry is nil.\n"
+          'ERROR: entry is nil.'
         elsif entry[:error]
-          print "ERROR: #{entry[:error]}\n"
+          "ERROR: #{entry[:error]}"
         elsif entry[:success]
-          print "SUC: #{entry[:success]}\n"
+          "SUC: #{entry[:success]}"
         else
-          print "ERROR: Unknown entry found.\n"
+          'ERROR: Unknown entry found.'
         end
       end
-
-      print "\n"
     end
   end
 end
