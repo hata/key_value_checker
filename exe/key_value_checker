@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'key_value_checker'
+
+KeyValueChecker::Command.run(ARGV)
+
