@@ -10,8 +10,12 @@ module KeyValueChecker
   class QueryParameters
     include KeyValueParser
 
-    def init(options = { param_separator: ':' })
-      @options = options
+    def initialize
+      @options = { param_separator: ':' }
+    end
+
+    def init(options)
+      @options = @options.merge(options)
     end
 
     def load_file(file)
