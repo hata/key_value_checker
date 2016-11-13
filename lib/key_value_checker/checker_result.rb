@@ -14,7 +14,7 @@ module KeyValueChecker
       result_message = result_to_message_list.join("\n")
 
       print "---- RESULT ----\n"
-      print "config_file: #{cmd_options[:config_file]}\n"
+      print "config_file: #{cmd_options[:config_files]}\n"
       print "params_file: #{cmd_options[:params_file]}\n"
       print "\n#{result_message}\n"
     end
