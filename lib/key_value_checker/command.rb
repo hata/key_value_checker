@@ -12,18 +12,6 @@ module KeyValueChecker
       @argv = argv
     end
 
-    def parse_argv
-      cmd_options = {}
-
-      OptionParser.new do |opt|
-        opt.on('-c CONFIG_FILE[,CONFIG_FILE,...]') { |v| cmd_options[:config_files] = v }
-        opt.on('-f KEY_VALUE_FILE') { |v| cmd_options[:key_value_file] = v }
-        opt.parse!(@argv)
-      end
-
-      cmd_options
-    end
-
     def execute
       cmd_options = parse_argv
       config = load_config_files(cmd_options[:config_files])
@@ -34,6 +22,20 @@ module KeyValueChecker
       checker = KeyValueChecker::Checker.new
       checker.validate(config, param_parser, result)
       result.print_result(cmd_options)
+    end
+
+    private
+
+    def parse_argv
+      cmd_options = {}
+
+      OptionParser.new do |opt|
+        opt.on('-c CONFIG_FILE[,CONFIG_FILE,...]') { |v| cmd_options[:config_files] = v }
+        opt.on('-f KEY_VALUE_FILE') { |v| cmd_options[:key_value_file] = v }
+        opt.parse!(@argv)
+      end
+
+      cmd_options
     end
 
     def load_config_files(config_files)

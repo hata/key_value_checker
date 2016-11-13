@@ -15,6 +15,8 @@ module KeyValueChecker
       result
     end
 
+    private
+
     def merge_key_map(config, params)
       config_map = config.to_map
       params_map = params.to_map

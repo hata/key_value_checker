@@ -22,6 +22,14 @@ module KeyValueChecker
       load_map YAML.load_file(file)
     end
 
+    def to_config
+      @rule_config[:config]
+    end
+
+    def to_map
+      @rule_config[:rule_map]
+    end
+
     def load_map(map_config)
       map_config.each do |key, value|
         intern_key = key.intern
@@ -33,6 +41,8 @@ module KeyValueChecker
       end
     end
 
+    private
+
     def merge_top_config(intern_key, new_value)
       @rule_config[intern_key] = merge_map_config(@rule_config[intern_key], new_value)
     end
@@ -40,14 +50,6 @@ module KeyValueChecker
     def merge_map_config(old_map, new_map)
       return new_map unless old_map
       old_map.merge(new_map)
-    end
-
-    def to_config
-      @rule_config[:config]
-    end
-
-    def to_map
-      @rule_config[:rule_map]
     end
   end
 end

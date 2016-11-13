@@ -19,11 +19,11 @@ module KeyValueChecker
       print "\n#{result_message}\n"
     end
 
+    private
+
     def result_to_message_list
       @result.map do |entry|
-        if !entry
-          'ERROR: entry is nil.'
-        elsif entry[:error]
+        if entry[:error]
           "ERROR: #{entry[:error]}"
         elsif entry[:success]
           "SUC: #{entry[:success]}"
