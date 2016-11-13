@@ -1,3 +1,5 @@
+require 'color_echo'
+
 module KeyValueChecker
   # Dump checker result.
   class CheckerResult
@@ -15,6 +17,7 @@ module KeyValueChecker
     def print_result(cmd_options)
       result_message = result_to_message_list.join("\n")
 
+      CE.pickup([/^ERR/], :red, nil, nil).pickup([/^SUC/], :green, nil, nil)
       print "---- RESULT ----\n"
       print "config_files: #{cmd_options[:config_files]}\n"
       print "key_value_file: #{cmd_options[:key_value_file]}\n"
