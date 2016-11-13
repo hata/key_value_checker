@@ -27,6 +27,6 @@ describe KeyValueChecker::CheckerConfig do
     config = KeyValueChecker::CheckerConfig.new
     parser_config = config.to_config[:key_value_parser]
     expect(parser_config[:classname]).to eq('KeyValueChecker::QueryParameters')
-    expect(parser_config[:options][:param_separator]).to eq(':')
+    expect(parser_config[:options][:separator]).to eq(':')
   end
 end

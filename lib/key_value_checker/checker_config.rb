@@ -52,6 +52,7 @@ module KeyValueChecker
 
     def merge_map_config(old_map, new_map)
       return new_map unless old_map
+      return old_map unless new_map
       old_map.merge(new_map)
     end
   end
