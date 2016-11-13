@@ -37,9 +37,9 @@ module KeyValueChecker
     end
 
     def validate_param(key, rule, param_value)
-      return [{ error: "No rule for '#{key}' found." }] unless rule
+      return [{ error: "No rule for '#{key}' found." }] unless rule && rule['pattern']
       return [{ error: "No parameter,'#{key}', found." }] if rule['required'] && !param_value
-      return [{ error: "No pattern for '#{key}' found." }] unless rule['pattern']
+      return [{ success: "Skip '#{key}' because no value found." }] unless rule['required'] || param_value
 
       result_list = []
       rule['pattern'].each do |pattern_definitions|
