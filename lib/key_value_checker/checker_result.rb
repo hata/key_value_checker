@@ -15,7 +15,7 @@ module KeyValueChecker
 
       print "---- RESULT ----\n"
       print "config_file: #{cmd_options[:config_files]}\n"
-      print "params_file: #{cmd_options[:params_file]}\n"
+      print "key_value_file: #{cmd_options[:key_value_file]}\n"
       print "\n#{result_message}\n"
     end
 

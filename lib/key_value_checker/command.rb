@@ -17,7 +17,7 @@ module KeyValueChecker
 
       OptionParser.new do |opt|
         opt.on('-c CONFIG_FILE[,CONFIG_FILE,...]') { |v| cmd_options[:config_files] = v }
-        opt.on('-q QUERY_PARAMS_FILE') { |v| cmd_options[:params_file] = v }
+        opt.on('-f KEY_VALUE_FILE') { |v| cmd_options[:key_value_file] = v }
         opt.parse!(@argv)
       end
 
@@ -29,7 +29,7 @@ module KeyValueChecker
       config = load_config_files(cmd_options[:config_files])
 
       params = KeyValueChecker::QueryParameters.new
-      params.load_file(cmd_options[:params_file])
+      params.load_file(cmd_options[:key_value_file])
       result = KeyValueChecker::CheckerResult.new
 
       checker = KeyValueChecker::Checker.new
