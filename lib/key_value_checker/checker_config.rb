@@ -12,7 +12,10 @@ module KeyValueChecker
         config: {
           key_value_parser: {
             classname: 'KeyValueChecker::QueryParameters',
-            options: { param_separator: ':' }
+            options: { separator: ':' }
+          },
+          compare_set: {
+            separator: ':'
           }
         }
       }

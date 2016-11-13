@@ -11,7 +11,7 @@ module KeyValueChecker
     include KeyValueParser
 
     def initialize
-      @options = { param_separator: ':' }
+      @options = { separator: ':' }
     end
 
     def init(options)
@@ -24,7 +24,7 @@ module KeyValueChecker
         line = line.strip
         next if line.length == 0
 
-        key, value = line.split(@options[:param_separator], 2)
+        key, value = line.split(@options[:separator], 2)
         @key_value_map[key] = value
       end
     end

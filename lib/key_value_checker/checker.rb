@@ -5,6 +5,7 @@ module KeyValueChecker
   # After that, checked status are added to result instance.
   class Checker
     def validate(config, params, result)
+      init_config(config)
       config_map = merge_key_map(config, params)
       params_map = params.to_map
 
@@ -16,6 +17,14 @@ module KeyValueChecker
     end
 
     private
+
+    def init_config(config)
+      if config.to_config[:compare_set] && config.to_config[:compare_set][:separator]
+        @compare_set_separator = config.to_config[:compare_set][:separator]
+      else
+        @compare_set_separator = ','
+      end
+    end
 
     def merge_key_map(config, params)
       config_map = config.to_map
@@ -47,6 +56,8 @@ module KeyValueChecker
         return validate_pattern_equal(key, rule_value, param_value)
       when 'regex'
         return validate_pattern_regex(key, rule_value, param_value)
+      when 'compare_set'
+        return validate_pattern_compare_set(key, rule_value, param_value)
       else
         return { error: "No pattern rule for '#{key}' #{rule[:pattern]} found. Set equal or regex." }
       end
@@ -65,6 +76,20 @@ module KeyValueChecker
         { success: "Regexp(#{rule_value}) match. key='#{key}' #{param_value}" }
       else
         { error: "Regexp(#{rule_value}) do not match. key='#{key}' #{param_value}" }
+      end
+    end
+
+    def validate_pattern_compare_set(key, rule_value, param_value)
+      rule_set = rule_value.split(@compare_set_separator)
+      param_set = param_value.split(@compare_set_separator)
+
+      rule_param_set = rule_set - param_set
+      param_rule_set = param_set - rule_set
+
+      if rule_param_set.size == 0 && param_rule_set.size == 0
+        { success: "Equal match key='#{key}'. #{rule_value}" }
+      else
+        { error: "Not Equal set key='#{key}'. rule_values - param_values = #{rule_param_set}, param_values - rule_values: #{param_rule_set}" }
       end
     end
   end
