@@ -23,14 +23,10 @@ describe KeyValueChecker::CheckerConfig do
     expect(config.to_map[:bar]).to eq('foo')
   end
 
-  it "can load a separator config" do
+  it "can return a default configs" do
     config = KeyValueChecker::CheckerConfig.new
-    config.load_map({config: {param_separator: 'x'}})
-    expect(config.to_config[:param_separator]).to eq('x')
-  end
-
-  it "can return a default separator" do
-    config = KeyValueChecker::CheckerConfig.new
-    expect(config.to_config[:param_separator]).to eq(':')
+    parser_config = config.to_config[:key_value_parser]
+    expect(parser_config[:classname]).to eq('KeyValueChecker::QueryParameters')
+    expect(parser_config[:options][:param_separator]).to eq(':')
   end
 end

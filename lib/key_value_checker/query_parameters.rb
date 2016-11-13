@@ -8,15 +8,19 @@ module KeyValueChecker
   # key2:value2
   # And these values are load and return by to_map.
   class QueryParameters
-    include KeyValueAccess
+    include KeyValueParser
 
-    def load_file(file, options = { sep: ':' })
+    def init(options = { param_separator: ':' })
+      @options = options
+    end
+
+    def load_file(file)
       @key_value_map = {}
       File.foreach(file) do |line|
         line = line.strip
         next if line.length == 0
 
-        key, value = line.split(options[:sep], 2)
+        key, value = line.split(@options[:param_separator], 2)
         @key_value_map[key] = value
       end
     end

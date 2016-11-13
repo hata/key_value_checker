@@ -8,7 +8,14 @@ module KeyValueChecker
     include KeyValueAccess
 
     def initialize
-      @rule_config = { config: { param_separator: ':' } }
+      @rule_config = {
+        config: {
+          key_value_parser: {
+            classname: 'KeyValueChecker::QueryParameters',
+            options: { param_separator: ':' }
+          }
+        }
+      }
     end
 
     def load_file(file)
