@@ -26,7 +26,7 @@ describe KeyValueChecker::CheckerConfig do
   it "can return a default configs" do
     config = KeyValueChecker::CheckerConfig.new
     parser_config = config.to_config[:key_value_parser]
-    expect(parser_config[:classname]).to eq('KeyValueChecker::QueryParameters')
+    expect(parser_config[:classname]).to eq('KeyValueChecker::DefaultParser')
     expect(parser_config[:options][:separator]).to eq(':')
   end
 end

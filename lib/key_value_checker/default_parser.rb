@@ -2,12 +2,12 @@ require 'key_value_checker/key_value_access'
 
 module KeyValueChecker
   # Create Key Value pairs from query parameters file.
-  # File is like browser developer tool QueryParameters.
+  # File is like browser developer tool DefaultParser.
   # e.g.
   # key1:value1
   # key2:value2
   # And these values are load and return by to_map.
-  class QueryParameters
+  class DefaultParser
     include KeyValueParser
 
     def initialize

@@ -11,7 +11,7 @@ module KeyValueChecker
       @rule_config = {
         config: {
           key_value_parser: {
-            classname: 'KeyValueChecker::QueryParameters',
+            classname: 'KeyValueChecker::DefaultParser',
             options: { separator: ':' }
           },
           compare_set: {
